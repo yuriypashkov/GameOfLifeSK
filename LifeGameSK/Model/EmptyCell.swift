@@ -30,6 +30,7 @@ extension EmptyCell {
         //мало покрасить клетку - надо еще в игровой модели сделать эту клетку Живой
         game.currentState[self.positionInArray!] = Cell.makeLiveCell() // это работает но это ужасно. Первое что приходит на ум - переделать с использованием протокола
         self.configureWithState(true)
+        print("test")
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
