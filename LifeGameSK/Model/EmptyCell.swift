@@ -1,9 +1,14 @@
 import SpriteKit
 
+protocol EmptyCellDelegate: class {
+    func didTap(cell: EmptyCell)
+}
+
 class EmptyCell: SKShapeNode {
-    
-    var isAlive: Bool = false
+
     var positionInArray: Int?
+    
+    weak var delegate: EmptyCellDelegate!
     
     init(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat, position: Int) {
         super.init()
@@ -27,10 +32,7 @@ class EmptyCell: SKShapeNode {
 extension EmptyCell {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //мало покрасить клетку - надо еще в игровой модели сделать эту клетку Живой
-        game.currentState[self.positionInArray!] = Cell.makeLiveCell() // это работает но это ужасно. Первое что приходит на ум - переделать с использованием протокола
-        self.configureWithState(true)
-        print("test")
+        self.delegate?.didTap(cell: self)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {

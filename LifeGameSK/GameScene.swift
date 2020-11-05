@@ -1,25 +1,26 @@
 import SpriteKit
 
-var game: Game!
 
-class GameScene: SKScene {
+
+class GameScene: SKScene, EmptyCellDelegate {
     
-    
-    
+    func didTap(cell: EmptyCell) {
+        game.setTappedCellLive(cell.positionInArray!)
+        cell.configureWithState(true)
+    }
+
     var dataSource: [Cell] = [] {
         didSet {
             for i in 0..<arrayOfEmptyCell.count {
                 arrayOfEmptyCell[i].configureWithState(dataSource[i].isAlive)
-                
-//                if arrayOfEmptyCell[i].isAlive && !dataSource[i].isAlive {
-//                    print("MAKE LIVE CELL")
-//                    dataSource[i] = Cell.makeLiveCell()
-//                }
             }
         }
     }
     
+    var game: Game!
+    
     var arrayOfEmptyCell = [EmptyCell]()
+    
     
     override func didMove(to view: SKView) {
         self.anchorPoint = .zero
@@ -37,7 +38,7 @@ class GameScene: SKScene {
         
         dataSource = game.generateInitialState().cells
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-            let state = game.iterate()
+            let state = self.game.iterate()
             self.display(state)
         }
         
@@ -57,6 +58,7 @@ class GameScene: SKScene {
                 let x = CGFloat(j) * cellWidth
                 let y = CGFloat(i) * cellWidth                
                 let emptyCell = EmptyCell(x: x, y: y, width: cellWidth, height: cellWidth, position: position)
+                emptyCell.delegate = self
                 arrayOfEmptyCell.append(emptyCell)
                 testNode.addChild(emptyCell)
                 position += 1
@@ -64,5 +66,6 @@ class GameScene: SKScene {
         }
         testNode.position = CGPoint(x: testNode.position.x - CGFloat(cellCount)*cellWidth/2, y: testNode.position.y - CGFloat(cellCount)*cellWidth/2)
     }
+    
   
 }

@@ -1,5 +1,8 @@
 import Foundation
 
+//protocol CellDelegate {
+//    func setTappedCellLive(_ i: Int)
+//}
 
 class Game {
     
@@ -13,6 +16,10 @@ class Game {
         self.height = height
         let cells = Array(repeating: Cell.makeDeadCell(), count: width * height)
         currentState = GameState(cells: cells)
+    }
+    
+    func setTappedCellLive(_ i: Int) {
+        currentState[i] = Cell.makeLiveCell()
     }
     
     func reset() {
