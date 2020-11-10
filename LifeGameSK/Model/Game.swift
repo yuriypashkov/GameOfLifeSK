@@ -1,15 +1,11 @@
 import Foundation
 
-//protocol CellDelegate {
-//    func setTappedCellLive(_ i: Int)
-//}
-
 class Game {
     
     let width: Int
     let height: Int
     var currentState: GameState
-    var indexPath: [IndexPath] = []
+    //var indexPath: [IndexPath] = []
     
     init(width: Int, height: Int) {
         self.width = width

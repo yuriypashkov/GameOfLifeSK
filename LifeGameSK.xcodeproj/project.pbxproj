@@ -65,7 +65,7 @@
 				213C9719255214B7004AD694 /* AppDelegate.swift */,
 				213C973B25533261004AD694 /* Model */,
 				213C971F255214B8004AD694 /* GameScene.swift */,
-				213C9721255214B8004AD694 /* GameViewController.swift */,
+				213C9744255B2E32004AD694 /* Screen */,
 				213C9723255214B8004AD694 /* Main.storyboard */,
 				213C9726255214B9004AD694 /* Assets.xcassets */,
 				213C9728255214B9004AD694 /* Info.plist */,
@@ -82,6 +82,14 @@
 				213C974025533322004AD694 /* Game.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		213C9744255B2E32004AD694 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				213C9721255214B8004AD694 /* GameViewController.swift */,
+			);
+			path = Screen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

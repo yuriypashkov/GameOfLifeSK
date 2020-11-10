@@ -32,16 +32,9 @@ class EmptyCell: SKShapeNode {
 extension EmptyCell {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.delegate?.didTap(cell: self)
+        delegate?.didTap(cell: self)
     }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            let location = touch.location(in: self)
-            print("Touch location is \(location) AND cell position is \(self.position)")
-        }
-    }
-    
+
 }
 
 

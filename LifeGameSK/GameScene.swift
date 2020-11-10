@@ -1,7 +1,5 @@
 import SpriteKit
 
-
-
 class GameScene: SKScene, EmptyCellDelegate {
     
     func didTap(cell: EmptyCell) {
@@ -48,8 +46,10 @@ class GameScene: SKScene, EmptyCellDelegate {
         dataSource = state.cells
     }
     
+    let testNode = SKNode()
+    
     func createNodeOfCells(w: CGFloat, h: CGFloat, cellCount: Int, cellWidth: CGFloat) {
-        let testNode = SKNode()
+        
         testNode.position = CGPoint(x: w/2, y: h/2)
         addChild(testNode)
         var position = 0
@@ -67,5 +67,18 @@ class GameScene: SKScene, EmptyCellDelegate {
         testNode.position = CGPoint(x: testNode.position.x - CGFloat(cellCount)*cellWidth/2, y: testNode.position.y - CGFloat(cellCount)*cellWidth/2)
     }
     
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {return}
+        let location = touch.location(in: self)
+        if let touchNode = selectNodeForTouch(location) {
+            didTap(cell: touchNode)
+        }
+    }
+    
+    func selectNodeForTouch(_ point: CGPoint) -> EmptyCell? {
+        return (self.atPoint(point) as? EmptyCell)
+    }
   
 }
+
+
