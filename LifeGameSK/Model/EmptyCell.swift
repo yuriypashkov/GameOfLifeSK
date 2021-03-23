@@ -1,3 +1,8 @@
+//
+// This is SpriteKit model for game cell
+// Not Dead or Live cell
+//
+
 import SpriteKit
 
 protocol EmptyCellDelegate: class {
@@ -31,8 +36,17 @@ class EmptyCell: SKShapeNode {
 
 extension EmptyCell {
     
+    // method for single tap on emptyCell
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         delegate?.didTap(cell: self)
+    }
+    
+    // try to create method for moved toches, but not have idea
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+                   let location = touch.location(in: self)
+                   print("Touch location is \(location) AND cell position is \(self.position)")
+        }
     }
 
 }

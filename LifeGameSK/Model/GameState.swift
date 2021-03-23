@@ -16,6 +16,7 @@ struct GameState {
 }
 
 extension GameState: Equatable {
+    
     public static func == (lhs: GameState, rhs: GameState) -> Bool {
         for lhsCell in lhs.cells {
             for rhsCell in rhs.cells {
@@ -26,4 +27,5 @@ extension GameState: Equatable {
         }
         return true
     }
+    
 }

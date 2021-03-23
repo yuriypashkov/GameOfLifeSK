@@ -5,7 +5,6 @@ class Game {
     let width: Int
     let height: Int
     var currentState: GameState
-    //var indexPath: [IndexPath] = []
     
     init(width: Int, height: Int) {
         self.width = width
@@ -14,14 +13,17 @@ class Game {
         currentState = GameState(cells: cells)
     }
     
+    // method for tap on dead cell
     func setTappedCellLive(_ i: Int) {
         currentState[i] = Cell.makeLiveCell()
     }
     
-    func reset() {
-        generateInitialState()
-    }
+//    func reset() {
+//        generateInitialState()
+//    }
+//
     
+    // one lifecycle of our game
     func iterate() -> GameState {
 
         var nextState = currentState
@@ -37,6 +39,7 @@ class Game {
         return nextState
     }
     
+    // compute state (dead or live) for current cell
     func state(x: Int, y: Int) -> Bool {
         let numberOfAliveNeighbours = aliveNeighbourCountAt(x: x, y: y)
         let position = x + y * width
@@ -49,6 +52,7 @@ class Game {
         }
     }
     
+    // count live neighbours
     func aliveNeighbourCountAt(x: Int, y: Int) -> Int {
         var numberOfAliveNeighbours = 0
         for i in x-1...x+1 {
@@ -70,7 +74,7 @@ class Game {
     @discardableResult
     func generateInitialState() -> GameState {
         let maxItems = width * height - 1
-        let initialStatePoints = generateRandom(between: 0...maxItems, count: maxItems / 8)
+        let initialStatePoints = generateRandom(range: 0...maxItems, count: maxItems / 8)
 
         for point in initialStatePoints {
             currentState[point] = Cell.makeLiveCell()
@@ -78,7 +82,7 @@ class Game {
         return currentState
     }
     
-    private func generateRandom(between range: ClosedRange<Int>, count: Int) -> [Int] {
+    private func generateRandom(range: ClosedRange<Int>, count: Int) -> [Int] {
         return Array(0...count).map { _ in
             Int.random(in: range)
         }
